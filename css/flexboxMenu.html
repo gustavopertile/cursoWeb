@@ -51,9 +51,26 @@
             background: #f50a31;
             color: #fff;
         }
-        /* ==================== */
-        /* Solução com Flex Box */
-        /* ==================== */
+        
+        .cabecalho {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+        }
+
+        .menu {
+            flex-grow: 10;
+        }
+
+        .menu ul {
+            display: flex;
+            /* justify-content: space-around; */
+        }
+
+        .menu li {
+            margin: 0px 10px;
+        }
     </style>
 </head>
 
