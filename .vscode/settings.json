@@ -8,6 +8,8 @@
         "dropzones",
         "middlewares",
         "nodownload",
+        "originalname",
+        "tabledata",
         "TESTEEEE"
     ]
 }
