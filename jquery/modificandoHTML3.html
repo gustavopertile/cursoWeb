@@ -13,13 +13,45 @@
     <div id='conteudo'></div>
 
     <script>
-        const pessoas = [
-            { nome: 'Ana', nota: 9.1 },
-            { nome: 'Bianca', nota: 8.4 },
-            { nome: 'Carlos', nota: 7.6 },
-            { nome: 'Julia', nota: 9.7 }
-        ]
-        
-        // ...
+        // $(document).ready(function (){
+        $(function () {
+            const pessoas = [{
+                    nome: 'Ana',
+                    nota: 9.1
+                },
+                {
+                    nome: 'Bianca',
+                    nota: 8.4
+                },
+                {
+                    nome: 'Carlos',
+                    nota: 7.6
+                },
+                {
+                    nome: 'Julia',
+                    nota: 9.7
+                }
+            ]
+
+            // const table = $('<table><tr><th>Nome</th><th>Nota</th></tr></table>')
+            //     .css('border', '6px solid white');
+
+            // pessoas.forEach(p => {
+            //     table.append($(`<tr><td>${p.nome}</td><td>${p.nota}</td></tr>`));
+            // })
+
+            // $('#conteudo').append(table);
+
+            const linhas = pessoas.map(p => {
+                const tdNome = $('<td>').html(p.nome)
+                const tdNota = $('<td>').html(p.nota)
+                // return $('<tr>').append(tdNome).append(tdNota)
+                return $('<tr>').append(tdNome, tdNota)
+            })
+
+            const tabela = $('<table>').append(linhas)
+                .css('border', 'solid 5px')
+            $('#conteudo').append(tabela)
+        })
     </script>
 </body>
