@@ -1,10 +1,10 @@
 const modoDev = process.env.NODE_ENV !== 'production'
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserPlugin = require("terser-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-
+ 
 module.exports = {
     mode: modoDev ? 'development' : 'production',
     entry: './src/index.js',
@@ -13,13 +13,15 @@ module.exports = {
         port: 9000,
     },
     optimization: {
+        minimize: true,
         minimizer: [
-            new UglifyJsPlugin({
-                cache: true,
-                parallel: true,
-                sourceMap: true
+            new TerserPlugin({
+              parallel: true,
+              terserOptions: {
+                nameCache: {},
+              }
             }),
-            new OptimizeCSSAssetsPlugin({})
+            new CssMinimizerPlugin()
         ]
     },
     output: {
@@ -28,10 +30,11 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({ filename: 'estilo.css' }),
-        new CopyWebpackPlugin([
+        new CopyWebpackPlugin({
+          patterns: [
             { context: 'src/', from: '**/*.html' },
             { context: 'src/', from: 'imgs/**/*' }
-        ])
+        ]})
     ],
     module: {
         rules: [{
